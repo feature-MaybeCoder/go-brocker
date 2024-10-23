@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/feature-MaybeCoder/go-brocker/internal/messages"
+)
 
 func main() {
-	fmt.Println("test")
+	reader := messages.JsonFileMessagesReader{}
+	messages := reader.ReadMessagesGroup()
+	fmt.Println(messages)
 }
