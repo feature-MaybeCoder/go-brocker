@@ -6,3 +6,6 @@ output/*
 
 storage/*
 !storage/.gitkeep
+
+bin/*
+!bin/.gitkeep
