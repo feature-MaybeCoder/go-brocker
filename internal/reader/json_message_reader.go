@@ -2,16 +2,19 @@ package reader
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 
 	main_config "github.com/feature-MaybeCoder/go-brocker/internal/config"
 	"github.com/feature-MaybeCoder/go-brocker/internal/models"
+	"github.com/feature-MaybeCoder/go-brocker/internal/queue"
 )
 
 type JsonFileMessagesReader struct {
+	Queue queue.Queue
 }
 
-func (dmr *JsonFileMessagesReader) ReadMessagesGroup() models.MessagesGroup {
+func (dmr *JsonFileMessagesReader) readMessage() models.Message {
 	var messages_group models.MessagesGroup
 	json_messages, err := os.ReadFile(
 		main_config.MainConfig.FileInputDir.String(),
@@ -29,5 +32,14 @@ func (dmr *JsonFileMessagesReader) ReadMessagesGroup() models.MessagesGroup {
 		panic(err.Error())
 	}
 
-	return messages_group
+	return messages_group.Messages[0]
+}
+
+func (jmr *JsonFileMessagesReader) RunReadingLoop() {
+	for {
+		message := jmr.readMessage()
+		fmt.Println(message, "was sent")
+		jmr.Queue.PushMessage(message)
+
+	}
 }
