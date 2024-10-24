@@ -1,17 +1,18 @@
-package messages
+package reader
 
 import (
 	"encoding/json"
 	"os"
 
 	main_config "github.com/feature-MaybeCoder/go-brocker/internal/config"
+	"github.com/feature-MaybeCoder/go-brocker/internal/models"
 )
 
 type JsonFileMessagesReader struct {
 }
 
-func (dmr *JsonFileMessagesReader) ReadMessagesGroup() MessagesGroup {
-	var messages_group MessagesGroup
+func (dmr *JsonFileMessagesReader) ReadMessagesGroup() models.MessagesGroup {
+	var messages_group models.MessagesGroup
 	json_messages, err := os.ReadFile(
 		main_config.MainConfig.FileInputDir.String(),
 	)
