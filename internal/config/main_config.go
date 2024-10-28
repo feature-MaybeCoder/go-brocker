@@ -7,8 +7,9 @@ import (
 )
 
 type mainConfig struct {
-	BaseDir      pathlib.Path
-	FileInputDir pathlib.Path
+	BaseDir               pathlib.Path
+	FileInputDir          pathlib.Path
+	MaxSendMessageRetries int
 }
 
 func parseConfig() mainConfig {
@@ -24,8 +25,9 @@ func parseConfig() mainConfig {
 	file_input_dir := base_dir.Join("input/messages.json")
 
 	return mainConfig{
-		BaseDir:      *base_dir,
-		FileInputDir: *file_input_dir,
+		BaseDir:               *base_dir,
+		FileInputDir:          *file_input_dir,
+		MaxSendMessageRetries: 10,
 	}
 }
 
