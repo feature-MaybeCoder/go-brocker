@@ -2,7 +2,6 @@ package reader
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 
 	main_config "github.com/feature-MaybeCoder/go-brocker/internal/config"
@@ -38,7 +37,6 @@ func (dmr *JsonFileMessagesReader) readMessage() models.Message {
 func (jmr *JsonFileMessagesReader) RunReadingLoop() {
 	for {
 		message := jmr.readMessage()
-		fmt.Println(message, "was sent")
 		jmr.Queue.PushMessage(message)
 
 	}
